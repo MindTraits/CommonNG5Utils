@@ -1,0 +1,23 @@
+<p>
+  country-component!
+</p>
+<form class="country-form">
+  <mat-form-field class="country-full-width">
+    <input matInput placeholder="Country" aria-label="Country" [matAutocomplete]="auto" [formControl]="countryCtrl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
+        <span>{{ country.name }}</span> (<small>{{country.code}}</small>) | 
+        <small>{{country.currency.name}}</small>
+        (<small>{{country.currency.code}}</small>)        
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <br />
+
+  <mat-slide-toggle color="primary"
+    [checked]="countryCtrl.disabled"
+    (change)="countryCtrl.disabled ? countryCtrl.enable() : countryCtrl.disable()">
+    Disable Input?
+  </mat-slide-toggle>
+</form>
